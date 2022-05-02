@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "327293724250",
+    "firebase_url": "https://beamax-fe5f6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "beamax-fe5f6",
+    "storage_bucket": "beamax-fe5f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327293724250:android:ce27a096569b999a5b5a63",
+        "android_client_info": {
+          "package_name": "com.androidcourse.g3.beamax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327293724250-k78ahuhkksi9u3qll3gstje1j9hvd2o2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.androidcourse.g3.beamax",
+            "certificate_hash": "e3e7a27cc6372df41ad68a8bf00bfabef9b1936b"
+          }
+        },
+        {
+          "client_id": "327293724250-vvvn6i88g5ra2ccscj818gnhssgqsvu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2mhDgbb0gx3GeNhdaII4PGCqcNl7jrNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327293724250-vvvn6i88g5ra2ccscj818gnhssgqsvu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

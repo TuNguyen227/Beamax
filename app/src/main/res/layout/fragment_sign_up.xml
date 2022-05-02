@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.SignUp">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            app:layout_constraintBottom_toTopOf="@id/guideline22"
+            android:background="@drawable/logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            android:text="SIGN UP"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline22"
+            />
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            android:text="E-MAIL"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline22"/>
+
+        <EditText
+            android:id="@+id/editTextMail"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+
+            android:drawableStart="@drawable/ic_baseline_mail_24"
+            android:background="@drawable/edit_text_selector"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintTop_toBottomOf="@id/emailText"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            />
+
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            android:text="PASSWORD"
+            android:textSize="30dp"
+            android:textStyle="bold"
+
+            app:layout_constraintTop_toBottomOf="@id/editTextMail"/>
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:background="@drawable/edit_text_selector"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintTop_toBottomOf="@id/passwordText"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            />
+
+        <TextView
+            android:id="@+id/repeatpasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            android:text="REPEAT PASSWORD"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/editTextPassword"/>
+
+        <EditText
+            android:id="@+id/editTextRepeatPassword"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:background="@drawable/edit_text_selector"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintTop_toBottomOf="@id/repeatpasswordText"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_btn"
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintEnd_toStartOf="@+id/logo"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline23"
+            app:layout_constraintEnd_toEndOf="@id/guideline24"
+            app:layout_constraintTop_toBottomOf="@id/editTextRepeatPassword"
+            android:text="SIGN UP"
+            android:textSize="30dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_sign_in_up_btn"
+            android:padding="20dp"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.9"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

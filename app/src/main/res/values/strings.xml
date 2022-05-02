@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">beamax</string>
+    <string name="web_client_id">327293724250-vvvn6i88g5ra2ccscj818gnhssgqsvu5.apps.googleusercontent.com</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signup"><u>Sign Up</u></string>
+    <string name="resend_code"><u><font color="@color/red">Please Resend</font></u></string>
+    <string name="facebook_app_id">576148170606318</string>
+    <string name="fb_login_protocol_scheme">fb576148170606318</string>
+    <string name="facebook_client_token">49ac5e3fa8ea15e777fec431f30ba3de</string>
+</resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.Verification">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"
+            app:layout_constraintBottom_toTopOf="@id/guideline25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/verificiation_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="26dp"
+            android:textStyle="bold"
+
+            android:text="Please type the verification code that has been sent to "
+            app:layout_constraintStart_toStartOf="@id/guideline26"
+            app:layout_constraintEnd_toEndOf="@id/guideline27"
+            app:layout_constraintTop_toBottomOf="@id/guideline25"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/receive_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline26"
+            app:layout_constraintTop_toBottomOf="@+id/verificiation_description"
+            android:textStyle="bold"
+            android:textSize="26dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_btn"
+            android:layout_width="55dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintEnd_toStartOf="@+id/logo"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText_code"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:maxLength="6"
+            android:drawableStart="@drawable/ic_baseline_verified_user_24"
+            app:layout_constraintStart_toStartOf="@id/guideline26"
+            app:layout_constraintEnd_toEndOf="@id/guideline27"
+            app:layout_constraintTop_toBottomOf="@id/receive_email"
+            android:background="@drawable/edit_text_selector"
+            />
+
+        <TextView
+            android:id="@+id/Text_resend_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline26"
+            app:layout_constraintEnd_toEndOf="@id/guideline27"
+            android:layout_marginTop="20dp"
+            android:textSize="26dp"
+            android:text="I don’t recevie a code!"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/editText_code"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guideline26"
+            app:layout_constraintEnd_toEndOf="@id/guideline27"
+            app:layout_constraintTop_toBottomOf="@id/Text_resend_description"
+            android:text="@string/resend_code"
+            android:textColor="@color/red"
+
+            android:textSize="26dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VERIFICATION"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.9"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
