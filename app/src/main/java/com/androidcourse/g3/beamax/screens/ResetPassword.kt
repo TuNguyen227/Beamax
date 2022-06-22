@@ -2,7 +2,6 @@ package com.androidcourse.g3.beamax.screens
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.androidcourse.g3.beamax.R
+import com.androidcourse.g3.beamax.base.BaseFragment
 import com.androidcourse.g3.beamax.databinding.CustomeToastBinding
 import com.androidcourse.g3.beamax.databinding.FragmentResetPasswordBinding
 
@@ -19,7 +19,7 @@ import com.androidcourse.g3.beamax.databinding.FragmentResetPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 
 
-class ResetPassword : Fragment() {
+class ResetPassword : BaseFragment() {
     private lateinit var binding: FragmentResetPasswordBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var toastbinding: CustomeToastBinding
@@ -29,24 +29,18 @@ class ResetPassword : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding= FragmentResetPasswordBinding.inflate(inflater,container,false)
-        firebaseAuth= FirebaseAuth.getInstance()
-        toastbinding= CustomeToastBinding.inflate(inflater,container,false)
-        toastview = layoutInflater.inflate(R.layout.custome_toast, toastbinding.llcontainer,false)
-        return binding.root
+    override fun init() {
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setUpUI() {
+
+    }
+
+    override fun setListener() {
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_resetPassword_to_signIn)
         }
-
         binding.editTextEmail.setOnKeyListener setOnkeyListenr@{ view, i, keyEvent ->
             if (keyEvent.action==KeyEvent.ACTION_DOWN&& i==KeyEvent.KEYCODE_ENTER) {
                 val email=binding.editTextEmail.text.toString().trim()
@@ -70,5 +64,24 @@ class ResetPassword : Fragment() {
         }
     }
 
+    override fun setObserver() {
+
+    }
+
+    override fun setAnimation() {
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding= FragmentResetPasswordBinding.inflate(inflater,container,false)
+        firebaseAuth= FirebaseAuth.getInstance()
+        toastbinding= CustomeToastBinding.inflate(inflater,container,false)
+        toastview = layoutInflater.inflate(R.layout.custome_toast, toastbinding.llcontainer,false)
+        return binding.root
+    }
 
 }

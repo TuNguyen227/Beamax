@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/viewPaperFragment2">
+    app:startDestination="@id/viewPaperFragment2"
+    >
     <fragment
         android:id="@+id/viewPaperFragment2"
         android:name="com.androidcourse.g3.beamax.onboarding.ViewPaperFragment"
@@ -13,7 +14,9 @@
             android:id="@+id/action_viewPaperFragment2_to_welcome"
             app:destination="@id/welcome"
             app:popUpTo="@id/viewPaperFragment2"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_right_left"
+            />
     </fragment>
     <fragment
         android:id="@+id/welcome"
@@ -22,12 +25,17 @@
         tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcome_to_signIn"
-            app:destination="@id/signIn" />
+            app:destination="@id/signIn"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
         <action
             android:id="@+id/action_welcome_to_home2"
             app:destination="@id/home2"
             app:popUpTo="@id/welcome"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+
+            app:popEnterAnim="@anim/anim_right_left"
+            />
     </fragment>
     <fragment
         android:id="@+id/signIn"
@@ -37,20 +45,28 @@
         <action
             android:id="@+id/action_signIn_to_signUp"
             app:destination="@id/signUp"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"
             />
         <action
             android:id="@+id/action_signIn_to_welcome"
             app:destination="@id/welcome"
             app:popUpTo="@id/signIn"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/anim_right_left"/>
         <action
             android:id="@+id/action_signIn_to_resetPassword"
-            app:destination="@id/resetPassword" />
+            app:destination="@id/resetPassword"
+            app:exitAnim="@anim/anim_right_left"
+            app:enterAnim="@anim/anim_left_right"
+            />
         <action
             android:id="@+id/action_signIn_to_home2"
             app:destination="@id/home2"
             app:popUpTo="@id/signIn"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
     </fragment>
     <fragment
         android:id="@+id/signUp"
@@ -61,10 +77,13 @@
             android:id="@+id/action_signUp_to_signIn"
             app:destination="@id/signIn"
             app:popUpTo="@id/signUp"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_right_left"/>
         <action
             android:id="@+id/action_signUp_to_verification"
-            app:destination="@id/verification" />
+            app:destination="@id/verification"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
     </fragment>
     <fragment
         android:id="@+id/verification"
@@ -86,10 +105,13 @@
             android:id="@+id/action_resetPassword_to_signIn"
             app:destination="@id/signIn"
             app:popUpTo="@id/resetPassword"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_right_left"/>
         <action
             android:id="@+id/action_resetPassword_to_newPassword"
-            app:destination="@id/newPassword" />
+            app:destination="@id/newPassword"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
     </fragment>
     <fragment
         android:id="@+id/newPassword"
@@ -111,10 +133,21 @@
             android:id="@+id/action_home2_to_welcome"
             app:destination="@id/welcome"
             app:popUpTo="@id/home2"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
         <action
             android:id="@+id/action_home2_to_profile"
-            app:destination="@id/profile" />
+            app:destination="@id/profile"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"
+            />
+        <action
+            android:id="@+id/action_home2_to_restaurantScreen"
+            app:destination="@id/restaurantScreen"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"
+            />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -123,6 +156,79 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_home2"
-            app:destination="@id/home2" />
+            app:destination="@id/home2"
+            app:enterAnim="@anim/anim_right_left"
+            app:exitAnim="@anim/anim_left_right"
+            />
+        <action
+            android:id="@+id/action_profile_to_welcome"
+            app:destination="@id/welcome"
+            app:popUpTo="@id/home2"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_right_left"/>
+
     </fragment>
+    <fragment
+        android:id="@+id/restaurantScreen"
+        android:name="com.androidcourse.g3.beamax.screens.RestaurantScreen"
+        android:label="RestaurantScreen"
+        tools:layout="@layout/fragment_restaurant_screen">
+        <action
+            android:id="@+id/action_restaurantScreen_to_profile"
+            app:destination="@id/profile"
+            app:popUpTo="@id/restaurantScreen"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_left_right"
+            />
+        <action
+            android:id="@+id/action_restaurantScreen_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/restaurantScreen"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_right_left"
+            />
+        <action
+            android:id="@+id/action_restaurantScreen_to_bookingScreen"
+            app:destination="@id/bookingScreen"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
+        <action
+            android:id="@+id/action_restaurantScreen_to_menuScreen"
+            app:destination="@id/menuScreen"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/bookingScreen"
+        android:name="com.androidcourse.g3.beamax.screens.BookingScreen"
+        android:label="fragment_booking_screen"
+        tools:layout="@layout/fragment_booking_screen" >
+        <action
+            android:id="@+id/action_bookingScreen_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/menuScreen"
+        android:name="com.androidcourse.g3.beamax.screens.MenuScreen"
+        android:label="MenuScreen"
+        tools:layout="@layout/fragment_menu_screen">
+        <action
+            android:id="@+id/action_menuScreen_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
+        <action
+            android:id="@+id/action_menuScreen_to_orderScreen"
+            app:destination="@id/orderScreen"
+            app:enterAnim="@anim/anim_left_right"
+            app:exitAnim="@anim/anim_right_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/orderScreen"
+        android:name="com.androidcourse.g3.beamax.screens.OrderScreen"
+        android:label="OrderScreen"
+        tools:layout="@layout/fragment_order_screen"/>
+
 </navigation>

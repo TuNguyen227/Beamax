@@ -4,19 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.androidcourse.g3.beamax.Validators
+import com.androidcourse.g3.beamax.base.BaseViewModel
+import com.androidcourse.g3.beamax.repository.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 
-class SignInViewModel(application: Application) : AndroidViewModel(application) {
-    private var errorLiveData= MutableLiveData<String>()
+class SignInViewModel(firebaseRepository: FirebaseRepository, handle: SavedStateHandle) : BaseViewModel(firebaseRepository, handle) {
 
     private  var firebaseAuth: FirebaseAuth
     private var signinLiveData= MutableLiveData<Boolean>()
     init {
         firebaseAuth= FirebaseAuth.getInstance()
     }
-    val error: LiveData<String>
-        get() = errorLiveData
+
 
     val IsSignIn:LiveData<Boolean>
         get() = signinLiveData
@@ -27,7 +28,8 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
 
         if (!isInputEmpty)
         {
-            errorLiveData.postValue("Please type your email and password")
+
+            errorData.postValue("Please type your email and password")
             return false
         }
 
@@ -42,7 +44,7 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
                 if (firebaseAuth.currentUser?.isEmailVerified==true)
                     signinLiveData.postValue(true)
                 else {
-                    errorLiveData.postValue("Unverified Account. Please go to your email and verify.")
+                    errorData.postValue("Unverified Account. Please go to your email and verify.")
                     signinLiveData.postValue(false)
                 }
 

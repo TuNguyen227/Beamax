@@ -1,20 +1,17 @@
 package com.androidcourse.g3.beamax.screens
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.androidcourse.g3.beamax.R
+import com.androidcourse.g3.beamax.base.BaseFragment
 
 import com.androidcourse.g3.beamax.databinding.FragmentOnboarding1Binding
-import java.util.prefs.Preferences
 
 
-class onboarding1 : Fragment() {
+class onboarding1 : BaseFragment() {
 
 
     private lateinit var binding: FragmentOnboarding1Binding
@@ -22,6 +19,16 @@ class onboarding1 : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+
+    override fun init() {}
+
+    override fun setUpUI() {}
+
+    override fun setListener() {}
+
+    override fun setObserver() {}
+
+    override fun setAnimation() {}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +40,17 @@ class onboarding1 : Fragment() {
         return binding.root
     }
 
-
+    companion object{
+        private var instance: onboarding1?=null
+        fun getInstance(): onboarding1
+        {
+            if (instance==null)
+            {
+                instance= onboarding1()
+            }
+            return instance as onboarding1
+        }
+    }
 
 
 }

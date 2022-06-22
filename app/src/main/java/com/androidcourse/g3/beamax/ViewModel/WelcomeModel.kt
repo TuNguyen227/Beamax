@@ -2,12 +2,16 @@ package com.androidcourse.g3.beamax.ViewModel
 
 
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.androidcourse.g3.beamax.R
+import com.androidcourse.g3.beamax.base.BaseViewModel
+import com.androidcourse.g3.beamax.repository.FirebaseRepository
 import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,43 +19,30 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.withContext
 
 
-class WelcomeModel(application:Application) :AndroidViewModel(application) {
-    private  val firebaseAuth: FirebaseAuth
-
-    private val context=getApplication<Application>().applicationContext
-
-
-
-    private var error= MutableLiveData<String>()
-
-    val errorLiveData:LiveData<String>
-        get()=error
-
+class WelcomeModel(firebaseRepository: FirebaseRepository, handle: SavedStateHandle,application: Application) :BaseViewModel(firebaseRepository, handle) {
+    @SuppressLint("StaticFieldLeak")
+    private val context=application.applicationContext
     private var success=MutableLiveData<Boolean>()
     val successLiveData:LiveData<Boolean>
         get() = success
 
-    init {
-        firebaseAuth= FirebaseAuth.getInstance()
-
-
-    }
-    fun isAnonymousSignIn(user: FirebaseUser?):Boolean
+    fun isAnonymousSignIn():Boolean
     {
-        if (user!=null  && isAnonymousVerified(user) )
+        if (requestCurrentUser()!=null  && isAnonymousVerified() )
         {
             return true
         }
         return false
     }
 
-    fun isAnonymousVerified(user: FirebaseUser?):Boolean
+    fun isAnonymousVerified():Boolean
     {
-        if (user!=null)
+        if (requestCurrentUser()!=null)
         {
-            for (profile in user.providerData)
+            for (profile in requestCurrentUser()!!.providerData)
             {
                 if (profile.providerId!="facebook.com" && profile.providerId!="google")
                     if (profile.isEmailVerified)
@@ -63,49 +54,19 @@ class WelcomeModel(application:Application) :AndroidViewModel(application) {
     }
 
 
-    fun isGoogleClientSignin(user: FirebaseUser?) : Boolean
+    fun isGoogleClientSignin() : Boolean
     {
-
-
-        if (user!=null  && isAccountProvidedbyGoogle(user) )
+        if (requestCurrentUser()!=null  && isAccountProvidedbyGoogle() )
         {
             return true
         }
         return false
     }
 
-    fun isAccountProvidedbyGoogle(user: FirebaseUser?):Boolean
-    {
-        if (user!=null)
-        {
-            for (profile in user.providerData)
-            {
-                if (profile.providerId=="google.com")
-                    return true
-            }
-        }
-
-        return false
-    }
-
-    fun isAccountProvidedbyFacebook(user: FirebaseUser?):Boolean
-    {
-        if (user!=null)
-        {
-            for (profile in user.providerData)
-            {
-                if (profile.providerId=="facebook.com")
-                    return true
-            }
-        }
-
-        return false
-    }
-
-    fun isFacebookClientSignin(user: FirebaseUser?):Boolean
+    fun isFacebookClientSignin():Boolean
     {
 
-        if (user!=null && isAccountProvidedbyFacebook(user) )
+        if (requestCurrentUser()!=null && isAccountProvidedbyFacebook() )
         {
             return true
         }
@@ -117,7 +78,7 @@ class WelcomeModel(application:Application) :AndroidViewModel(application) {
     fun RegisterGoogleClientIDCredential(idToken : String?)
     {
         val credentical=GoogleAuthProvider.getCredential(idToken,null)
-        val userwithcredentical=firebaseAuth.signInWithCredential(credentical).addOnCompleteListener{
+        FirebaseAuth.getInstance().signInWithCredential(credentical).addOnCompleteListener{
 
             if (it.isSuccessful)
             {
@@ -125,7 +86,7 @@ class WelcomeModel(application:Application) :AndroidViewModel(application) {
 
             }
             else
-                error.postValue("Unsuccesfully")
+                errorData.postValue("Unsuccesfully")
 
 
         }

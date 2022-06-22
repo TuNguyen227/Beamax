@@ -17,4 +17,10 @@
         <item name="android:windowBackground" >@drawable/splash</item>
         <item name="android:statusBarColor">@color/splash_background</item>
     </style>
+    <style name="Theme.AppCompat.Dialog" parent="android:ThemeOverlay.Material.Dialog">
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorSecondary">@color/main_color</item>
+
+        
+    </style>
 </resources>

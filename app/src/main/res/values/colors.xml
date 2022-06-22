@@ -12,4 +12,5 @@
     <color name="selected_dot">#5C5900</color>
     <color name="main_color">#C8930A</color>
     <color name="red">#F80000</color>
+    <color name="gray">#4D404040</color>
 </resources>

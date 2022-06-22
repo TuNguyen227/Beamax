@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/guideline34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatar" />
+
+        <TextView
+            android:id="@+id/preferential"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/text_underline_selector"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:text="Preferential"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="@id/guideline35"
+            app:layout_constraintStart_toStartOf="@id/guideline42"
+            app:layout_constraintTop_toBottomOf="@id/profile_name" />
+
+        <TextView
+            android:id="@+id/payment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/text_underline_selector"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:text="Payment"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:drawableStartCompat="@drawable/ic_baseline_credit_card_24"
+            app:layout_constraintEnd_toEndOf="@id/guideline35"
+            app:layout_constraintStart_toStartOf="@id/guideline42"
+            app:layout_constraintTop_toBottomOf="@+id/preferential" />
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/text_underline_selector"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:text="Contact"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:drawableStartCompat="@drawable/ic_baseline_contact_support_24"
+            app:layout_constraintEnd_toEndOf="@id/guideline35"
+            app:layout_constraintStart_toStartOf="@id/guideline42"
+            app:layout_constraintTop_toBottomOf="@id/payment" />
+
+        <TextView
+            android:id="@+id/signout_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/text_underline_selector"
+            android:clickable="true"
+            android:fontFamily="@font/roboto"
+            android:text="Sign Out"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:drawableStartCompat="@drawable/ic_log_out_icon"
+            app:layout_constraintEnd_toEndOf="@id/guideline35"
+            app:layout_constraintStart_toStartOf="@id/guideline42"
+            app:layout_constraintTop_toBottomOf="@+id/contact" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.3" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_back_icon"
+            app:layout_constraintStart_toStartOf="@id/guideline42"
+            app:layout_constraintTop_toTopOf="@id/guideline43"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

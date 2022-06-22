@@ -1,9 +1,6 @@
 package com.androidcourse.g3.beamax.screens
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +10,21 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.androidcourse.g3.beamax.R
+import com.androidcourse.g3.beamax.base.BaseFragment
 import com.androidcourse.g3.beamax.databinding.CustomeToastBinding
 import com.androidcourse.g3.beamax.databinding.FragmentSignUpBinding
 
 import com.androidcourse.group3.beamax.ViewModel.SignUpViewModel
 
 import com.google.firebase.auth.FirebaseAuth
-import java.lang.Exception
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 
-class SignUp : Fragment() {
+class SignUp : BaseFragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var signUpViewModel: SignUpViewModel
+    private  val signUpViewModel: SignUpViewModel by stateViewModel()
     private lateinit var ToastView:View
     private lateinit var toastBinding: CustomeToastBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,26 +32,20 @@ class SignUp : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding= FragmentSignUpBinding.inflate(inflater,container,false)
-        toastBinding= CustomeToastBinding.inflate(inflater,container,false)
-        signUpViewModel=ViewModelProvider(this).get(SignUpViewModel::class.java)
-        firebaseAuth= FirebaseAuth.getInstance()
-        ToastView=layoutInflater.inflate(R.layout.custome_toast,toastBinding.llcontainer,false)
-        return binding.root
+    override fun init() {
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setUpUI() {
+
+    }
+
+    override fun setListener() {
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_signUp_to_signIn)
         }
         binding.signUpBtn.setOnClickListener {
-            val email=binding.editTextMail.text.toString().trim()
+            val email=binding.editTextMail.text.toString()
             val password=binding.editTextPassword.text.toString().trim()
             val repeatpassword=binding.editTextRepeatPassword.text.toString().trim()
 
@@ -63,11 +56,30 @@ class SignUp : Fragment() {
 
 
         }
-        onSignUp_listener()
-        onSignUp_error_lisnter()
     }
 
-    fun onSignUp_listener()
+    override fun setObserver() {
+        onSignUpSuccessObserver()
+        onSignUpFailObserver()
+    }
+
+    override fun setAnimation() {
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding= FragmentSignUpBinding.inflate(inflater,container,false)
+        toastBinding= CustomeToastBinding.inflate(inflater,container,false)
+        firebaseAuth= FirebaseAuth.getInstance()
+        ToastView=layoutInflater.inflate(R.layout.custome_toast,toastBinding.llcontainer,false)
+        return binding.root
+    }
+
+    fun onSignUpSuccessObserver()
     {
 
 
@@ -83,11 +95,13 @@ class SignUp : Fragment() {
                 toast.view=ToastView
                 toast.show()
             }
+
+
         }
     }
-    fun onSignUp_error_lisnter()
+    fun onSignUpFailObserver()
     {
-        signUpViewModel.error.observe(viewLifecycleOwner)
+        signUpViewModel.errorLiveData.observe(viewLifecycleOwner)
         {
             val toast=Toast(context)
             toast.duration=Toast.LENGTH_SHORT

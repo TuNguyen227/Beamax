@@ -4,20 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.androidcourse.g3.beamax.Validators
+import com.androidcourse.g3.beamax.base.BaseViewModel
+import com.androidcourse.g3.beamax.repository.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 
-class SignUpViewModel(application: Application) : AndroidViewModel(application) {
-    private var errorLiveData= MutableLiveData<String>()
+class SignUpViewModel(firebaseRepository: FirebaseRepository,
+                      handle: SavedStateHandle
+) : BaseViewModel(firebaseRepository, handle) {
+
     private var _sendEmailVerification=MutableLiveData<Boolean>()
-    private  var firebaseAuth: FirebaseAuth
-
-    init {
-        firebaseAuth= FirebaseAuth.getInstance()
-    }
-    val error:LiveData<String>
-        get() = errorLiveData
-
     val sendEmailVerification:LiveData<Boolean>
         get() = _sendEmailVerification
 
@@ -33,49 +30,53 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
 
         if (!isInputEmpty)
         {
-            errorLiveData.postValue("Please type your email and password")
+            errorData.postValue("Please type your email and password")
             return false
         }
 
         if (!isEmailvalid)
         {
-            errorLiveData.postValue("Please type a correct email format")
+            errorData.postValue("Please type a correct email format")
             return false
         }
 
         if (!isPasswordMatchRepeatpassword)
         {
-            errorLiveData.postValue("Unmatched repeat password")
+            errorData.postValue("Unmatched repeat password")
             return false
         }
 
         if (!isPasswordLengthSatisfied)
         {
-            errorLiveData.postValue("Password limit must be at least 8 characters")
+            errorData.postValue("Password limit must be at least 8 characters")
             return false
         }
 
         if (!isPasswordPatternSatisfied)
         {
-            errorLiveData.postValue("Password must be contained character,A-Z,number and special character.")
+            errorData.postValue("Password must be contained character,A-Z,number and special character.")
             return false
         }
-
-
-
-
-
         return isEmailvalid && isPasswordLengthSatisfied && isPasswordPatternSatisfied && isPasswordMatchRepeatpassword && isInputEmpty
     }
 
     fun SignUP(email: String,password: String,repeatpassword: String)
     {
-        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
+        firebaseRepository.getFirebaseAuth().createUserWithEmailAndPassword(email,password).addOnCompleteListener { it ->
             if (it.isSuccessful)
             {
-                firebaseAuth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
-                    _sendEmailVerification.postValue(true)
+                val currentUser=firebaseRepository.getCurrentUser()
+                currentUser?.reload()
+                if (!currentUser!!.isEmailVerified)
+                {
+                    firebaseRepository.getCurrentUser()?.sendEmailVerification()?.addOnCompleteListener {result->
+                        if (result.isSuccessful)
+                            _sendEmailVerification.postValue(true)
+                        else
+                            errorData.postValue("Could not create verification code")
+                    }
                 }
+
             }
         }
     }

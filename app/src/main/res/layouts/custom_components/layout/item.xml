@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/itemview_card"
+        android:padding="20dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        >
+
+        <ImageView
+            android:id="@+id/item_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </ImageView>
+
+        <ProgressBar
+            android:id="@+id/prog_bar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="@id/item_img"
+            app:layout_constraintEnd_toEndOf="@id/item_img"
+            app:layout_constraintTop_toTopOf="@id/item_img"
+            app:layout_constraintBottom_toBottomOf="@id/item_img"/>
+        <TextView
+            android:paddingLeft="10dp"
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/item_img"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="item name" />
+
+        <TextView
+            android:id="@+id/item_desc"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/item_img"
+            app:layout_constraintTop_toBottomOf="@+id/item_name"
+            android:text="item desc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

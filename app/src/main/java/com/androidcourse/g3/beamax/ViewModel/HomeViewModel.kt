@@ -1,103 +1,112 @@
 package com.androidcourse.g3.beamax.ViewModel
 
 import android.app.Application
+import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.androidcourse.group3.beamax.DATA.User
+import androidx.lifecycle.*
+import com.androidcourse.g3.beamax.base.BaseViewModel
+import com.androidcourse.g3.beamax.repository.FirebaseRepository
+import com.androidcourse.g3.beamax.repository.ResponseListener
+import com.androidcourse.group3.beamax.DATA.Restaurants
+import com.facebook.AccessToken
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class HomeViewModel(firebaseRepository: FirebaseRepository, handle: SavedStateHandle) : BaseViewModel(firebaseRepository, handle) {
 
-    private var listData=MutableLiveData<List<User>>()
-    private var listUser= mutableListOf<User>()
-    private var onSearchList= mutableListOf<User>()
-    private lateinit var database : DatabaseReference
-    val _listLiveda:LiveData<List<User>>
+    private var listData=MutableLiveData<List<Restaurants?>>()
+    private var listOfRestaurant= mutableListOf<Restaurants?>()
+    private var onSearchList= mutableListOf<Restaurants?>()
+    val _listLiveda:LiveData<List<Restaurants?>>
         get() = listData
-    init {
-        database=FirebaseDatabase.getInstance("https://beamax-fe5f6-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
-    }
-
-    fun getListformDatabase()
-    {
-        Log.d("debug","get data")
-        viewModelScope.launch {
-            database.child("Users").get().addOnSuccessListener {
-                for (data in it.children) {
-                    val user = data.getValue(User::class.java)
-                    if (user != null) {
-                        listUser.add(user)
-                    }
-                }
-            }.addOnCompleteListener {
-                listData.postValue(listUser)
-
-            }
-        }
 
 
-
-
-    }
-
+    fun getAvatar()=requestAvatarUri()
     fun onSearchDataChanged(searchText: String?)
     {
+        isLoading.postValue(true)
         onSearchList.clear()
         if (searchText != null) {
             Log.d("debug",searchText)
-            listUser.forEach{
-                if (it.name.lowercase().contains(searchText))
+            listOfRestaurant.forEach{
+                if (it?.name?.lowercase()?.contains(searchText)==true)
                 {
                     onSearchList.add(it)
                     Log.d("debug_list",onSearchList.size.toString())
                 }
             }
             listData.postValue(onSearchList)
-
+            isLoading.postValue(false)
         }
         else
         {
             onSearchList.clear()
 
             listData.postValue(onSearchList)
+            isLoading.postValue(false)
         }
     }
 
-    fun NotifyDataChanged()
+    fun getListData()
     {
-
-
-        database.child("Users").addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists())
-                {
-                    listUser.clear()
-                    Log.d("debug","data changed")
-                    for (data in snapshot.children)
-                    {
-                        val user=data.getValue(User::class.java)
-
-                        if (user != null) {
-
-                            listUser.add(user)
-                        }
-
-
-                    }
-                    listData.postValue(listUser)
+            isLoading.postValue(true)
+        firebaseRepository.requestRestaurant(object : ResponseListener{
+                override fun onReceivedResponse(list: List<Restaurants?>) {
+                    listData.postValue(list)
+                    listOfRestaurant=list.toMutableList()
+                    isLoading.postValue(false)
                 }
 
+                override fun onError(e: String) {
+                    isLoading.postValue(false)
+                }
+
+            override fun onSuccess(task: Boolean) {
+
+            }
+        } )
+    }
+
+    fun getListDataByCategory(requestcategory:String)
+    {
+        isLoading.postValue(true)
+        if (requestcategory.equals("All"))
+        {
+            listData.postValue(listOfRestaurant)
+            isLoading.postValue(false)
+            return
+        }
+        onSearchList.clear()
+        Log.d("currentList",onSearchList.size.toString())
+        firebaseRepository.requestRestaurant(object : ResponseListener{
+            override fun onReceivedResponse(list: List<Restaurants?>) {
+                list.forEach {
+                    if(it?.category.toString().contains(requestcategory))
+                        onSearchList.add(it)
+                    if(requestcategory.equals("Booking")&& it?.hasBooking==true)
+                        onSearchList.add(it)
+
+                }
+                Log.d("currentList",onSearchList.size.toString())
+                listData.postValue(onSearchList)
+                isLoading.postValue(false)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("debug6",error.message)
+            override fun onError(e: String) {
+                isLoading.postValue(false)
             }
-
-
+            override fun onSuccess(task: Boolean) {
+            }
         })
     }
-}
+
+    }
+
+
+
+
+
+
+
