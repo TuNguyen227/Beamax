@@ -48,7 +48,7 @@ class SignIn : BaseFragment() {
             findNavController().navigate(R.id.action_signIn_to_signUp)
         }
         binding.backBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_signIn_to_welcome)
+            activity?.onBackPressed()
         }
         binding.forgetPasswordText.setOnClickListener {
             findNavController().navigate(R.id.action_signIn_to_resetPassword)

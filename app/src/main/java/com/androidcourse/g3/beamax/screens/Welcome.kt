@@ -107,6 +107,8 @@ class Welcome : BaseFragment() {
                 view?.post {
                     findNavController().navigate(R.id.action_welcome_to_home2)
                 }
+
+
             }
         }
         return binding.root

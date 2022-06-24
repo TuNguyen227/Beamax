@@ -6,11 +6,11 @@ class Categories(val name:String,val image:Int) {
 
     companion object{
         fun getCategoryList(): List<Categories> {
-            return listOf(Categories("All", R.drawable.ic_launcher_foreground),
-                        Categories("Drink",R.drawable.ic_launcher_foreground),
-                        Categories("Food",R.drawable.ic_launcher_foreground),
-                        Categories("Fastfood",R.drawable.ic_launcher_foreground),
-                        Categories("Booking",R.drawable.ic_launcher_foreground))
+            return listOf(Categories("All", R.drawable.ic_all),
+                        Categories("Drink",R.drawable.ic_drink),
+                        Categories("Food",R.drawable.ic_food),
+                        Categories("Fastfood",R.drawable.ic_fastfood),
+                        Categories("Booking",R.drawable.ic_booking))
         }
     }
 }

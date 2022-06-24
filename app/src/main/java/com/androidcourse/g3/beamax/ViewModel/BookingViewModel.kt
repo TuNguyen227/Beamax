@@ -26,7 +26,9 @@ class BookingViewModel(firebaseRepository: FirebaseRepository,
         }.addOnFailureListener {
             Log.d("debug",it.message.toString())
             isLoading.postValue(false)
+            errorData.postValue("You can't book that time.")
         }
         }
 
     }
+

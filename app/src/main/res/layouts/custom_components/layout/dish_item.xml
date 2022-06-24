@@ -8,6 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/dish_item_layout"
         android:layout_height="wrap_content"
         android:background="@drawable/text_underline_selector">
         <TextView

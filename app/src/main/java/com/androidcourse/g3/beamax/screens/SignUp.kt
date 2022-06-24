@@ -42,7 +42,7 @@ class SignUp : BaseFragment() {
 
     override fun setListener() {
         binding.backBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_signUp_to_signIn)
+            requireActivity().onBackPressed()
         }
         binding.signUpBtn.setOnClickListener {
             val email=binding.editTextMail.text.toString()

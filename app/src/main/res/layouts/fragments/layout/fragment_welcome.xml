@@ -38,7 +38,7 @@
             android:id="@+id/fb_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/custom_text_box"
             android:drawableStart="@drawable/ic_icon_fb"
@@ -53,7 +53,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/custom_text_box"
             android:drawableStart="@drawable/ic_gg_icon"
             android:paddingStart="10dp"
@@ -64,7 +64,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signin_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="76dp"
 

@@ -9,6 +9,8 @@
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/custom_text_box.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/custome_toast.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/edit_text_selector.xml" value="0.179" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/ic_all.xml" value="0.1905" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.1905" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/ic_gg_icon.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/ic_log_out_icon.xml" value="0.2265" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/ic_log_out_icon_50.xml" value="0.2265" />
@@ -16,6 +18,7 @@
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/selected_dot.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/splash.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawable/unselected_dots.xml" value="0.179" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_all.xml" value="0.268" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_back_icon.xml" value="0.224" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_baseline_access_time_24.xml" value="0.228" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_baseline_arrow_back_24.xml" value="0.179" />
@@ -24,7 +27,11 @@
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_baseline_credit_card_24.xml" value="0.1935" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_baseline_lock_24.xml" value="0.179" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_baseline_mail_24.xml" value="0.228" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_booking.xml" value="0.1905" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_booking_icon.xml" value="0.191" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_drink.xml" value="0.1905" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_fastfood.xml" value="0.1905" />
+        <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_food.xml" value="0.1905" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_forward_icon.xml" value="0.284" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_icon_fb.xml" value="0.2265" />
         <entry key="..\:/AndroidProjects/Beamax/app/src/main/res/drawables/icons/drawable/ic_log_out_icon.xml" value="0.2265" />

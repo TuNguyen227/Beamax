@@ -49,7 +49,7 @@ class DayTimeUtil {
 
         fun getDaysOfMonth(): MutableList<DATE> {
             val list= mutableListOf<DATE>()
-            for(i in (Calendar.getInstance(TimeZone.getDefault()).time.date)..31)
+            for(i in (Calendar.getInstance(TimeZone.getDefault()).time.date)..(31-1))
             {
                 list.add(DATE(getDate(i), getMonth(i), getDayofWeek(i)))
             }
@@ -57,16 +57,8 @@ class DayTimeUtil {
         }
         fun getTimerPicker(context:Context,textView: TextView)
         {
-            val calendar=Calendar.getInstance()
-            TimePickerDialog(context, R.style.Theme_AppCompat_Dialog,object : TimePickerDialog.OnTimeSetListener{
-                @SuppressLint("SimpleDateFormat")
-                override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-                    calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                    calendar.set(Calendar.MINUTE,minute)
+            var time:String?=null
 
-                    textView.text= SimpleDateFormat("HH:mm aa").format(calendar.time)
-                }
-            },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show()
         }
     }
 }

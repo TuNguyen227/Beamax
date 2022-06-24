@@ -46,7 +46,7 @@ class Profile : BaseFragment() {
             }
         }
         binding.backBtn.setOnClickListener {
-
+            requireActivity().onBackPressed()
         }
     }
 

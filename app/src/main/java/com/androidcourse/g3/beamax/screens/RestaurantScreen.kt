@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.androidcourse.g3.beamax.DATA.DATE
 import com.androidcourse.g3.beamax.R
@@ -134,7 +135,7 @@ class RestaurantScreen : BaseFragment() {
     fun onBackListener()
     {
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_restaurantScreen_to_home2)
+            requireActivity().onBackPressed()
         }
     }
 
@@ -152,6 +153,7 @@ class RestaurantScreen : BaseFragment() {
                 val bundle=Bundle()
                 bundle.putString("DATA",arguments?.getString("DATA"))
                 findNavController().navigate(R.id.action_restaurantScreen_to_bookingScreen,bundle)
+
             }
             else
             {

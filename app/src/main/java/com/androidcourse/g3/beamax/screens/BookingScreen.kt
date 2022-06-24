@@ -1,5 +1,6 @@
 package com.androidcourse.g3.beamax.screens
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.icu.text.DateFormat
 import android.icu.text.SimpleDateFormat
@@ -9,7 +10,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +23,7 @@ import com.androidcourse.g3.beamax.R
 import com.androidcourse.g3.beamax.ViewModel.BookingViewModel
 import com.androidcourse.g3.beamax.adapter.DateAdapter
 import com.androidcourse.g3.beamax.base.BaseFragment
+import com.androidcourse.g3.beamax.databinding.CustomeToastBinding
 import com.androidcourse.g3.beamax.databinding.FragmentBookingScreenBinding
 import com.androidcourse.g3.beamax.interfaces.OnDateItemClick
 import com.androidcourse.g3.beamax.utility.DayTimeUtil
@@ -38,6 +44,8 @@ class BookingScreen : BaseFragment() {
     private var date:String?=null
     private var time:String?=null
     private var peoples:String?=null
+    private lateinit var toastbinding: CustomeToastBinding
+    private lateinit var toastview:View
     private val bundle by lazy{
         Bundle()
     }
@@ -62,8 +70,18 @@ class BookingScreen : BaseFragment() {
 
     override fun setListener() {
         binding.timePicker.setOnClickListener {
-            context?.let { it1 -> DayTimeUtil.getTimerPicker(it1,binding.timePicker) }
-            time=binding.timePicker.text.toString()
+            val calendar=Calendar.getInstance()
+            TimePickerDialog(context, R.style.Theme_AppCompat_Dialog,object : TimePickerDialog.OnTimeSetListener{
+                @SuppressLint("SimpleDateFormat")
+                override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+                    calendar.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                    calendar.set(Calendar.MINUTE,minute)
+
+                    binding.timePicker.text= SimpleDateFormat("HH:mm aa").format(calendar.time)
+                    time=binding.timePicker.text.toString()
+                }
+            },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show()
+
         }
         binding.txt12Peo.setOnClickListener {
             binding.txt12Peo.setBackgroundResource(R.drawable.date_clicked_shape)
@@ -91,7 +109,7 @@ class BookingScreen : BaseFragment() {
             findNavController().navigate(R.id.action_bookingScreen_to_profile)
         }
         binding.btnBack.setOnClickListener {
-            findNavController().enableOnBackPressed(true)
+            requireActivity().onBackPressed()
         }
     }
 
@@ -101,6 +119,14 @@ class BookingScreen : BaseFragment() {
                 binding.progBar.visibility=View.VISIBLE
             else
                 binding.progBar.visibility=View.GONE
+        }
+        bookingViewModel.errorLiveData.observe(viewLifecycleOwner){
+            val toast= Toast(context)
+            toast.duration= Toast.LENGTH_SHORT
+            toastview.findViewById<ImageView>(R.id.toast_ic).setBackgroundResource(R.drawable.ic_baseline_notification_important_24)
+            toastview.findViewById<TextView>(R.id.toast_content).setText("You have not odered yet")
+            toast.view=toastview
+            toast.show()
         }
     }
 
@@ -114,6 +140,8 @@ class BookingScreen : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding= FragmentBookingScreenBinding.inflate(inflater,container,false)
+        toastbinding= DataBindingUtil.inflate(inflater, R.layout.custome_toast,container,false)
+        toastview = layoutInflater.inflate(R.layout.custome_toast, toastbinding.llcontainer,false)
         return binding.root
     }
 
@@ -125,8 +153,11 @@ class BookingScreen : BaseFragment() {
                 {
                     if (pos == position)
                     {
-                        this@BookingScreen.date=position.toString()
-                        bundle.putString("date","${date.date}")
+
+                        val view=binding.rv.getChildAt(pos).findViewById(R.id.layout) as View
+                        val datebooking=(view.findViewById(R.id.date_num_txt) as TextView).text
+                        bundle.putString("date","${datebooking}")
+                        this@BookingScreen.date=datebooking.toString()
                         binding.rv.getChildAt(pos).setBackgroundResource(R.drawable.date_clicked_shape)
                     }
                     else

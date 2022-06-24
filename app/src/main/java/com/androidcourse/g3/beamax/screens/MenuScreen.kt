@@ -42,6 +42,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
+import org.w3c.dom.Text
 
 
 class MenuScreen : BaseFragment() {
@@ -100,15 +101,47 @@ class MenuScreen : BaseFragment() {
             findNavController().navigate(R.id.action_menuScreen_to_profile)
         }
         binding.btnOrder.setOnClickListener {
-
+            listOfOrder.clear()
+            for(i in 0 until (adapter.itemCount))
+            {
+                val itemview=binding.rv.getChildAt(i).findViewById(R.id.dish_item_layout) as View
+                val dish=(itemview.findViewById(R.id.dish_name) as TextView).text.toString()
+                val price=(itemview.findViewById(R.id.dish_price) as TextView).text.toString()
+                val number=(itemview.findViewById(R.id.number) as TextView).text.toString()
+                if (number!="0")
+                    listOfOrder.add(OrderDish(dish,price,number))
+            }
             val toast= Toast(context)
             toast.duration= Toast.LENGTH_SHORT
-            toastview.findViewById<ImageView>(R.id.toast_ic).setBackgroundResource(R.drawable.ic_baseline_check_24)
-            toastview.findViewById<TextView>(R.id.toast_content).setText("You have Order Successfully")
-            toast.view=toastview
-            toast.show()
-        }
 
+
+            toast.view=toastview
+
+            if (list?.size!=0)
+            {
+                var total:Long=0
+                listOfOrder.forEach{
+                    total=total + (it.price!!.toLong()*it.number!!.toLong())
+                }
+                toastview.findViewById<ImageView>(R.id.toast_ic).setBackgroundResource(R.drawable.ic_baseline_check_24)
+                val text="You have to pay ${total} VND."
+                toastview.findViewById<TextView>(R.id.toast_content).setText(text)
+                toast.view=toastview
+                toast.show()
+            }
+            else
+            {
+                toastview.findViewById<ImageView>(R.id.toast_ic).setBackgroundResource(R.drawable.ic_baseline_notification_important_24)
+                toastview.findViewById<TextView>(R.id.toast_content).setText("You have not odered yet")
+                toast.view=toastview
+                toast.show()
+            }
+
+
+        }
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
     }
 

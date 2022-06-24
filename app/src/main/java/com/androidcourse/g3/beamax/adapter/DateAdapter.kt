@@ -41,7 +41,7 @@ class DateAdapter(listener: OnDateItemClick): ListAdapter<DATE,DateAdapter.DateH
         fun binding(item : DATE, listener: OnDateItemClick)
         {
             binding.dateNumTxt.text=item.date
-            binding.dateTxt.text=item.dayOfWeek
+            //binding.dateTxt.text=item.dayOfWeek
             binding.monthTxt.text=item.month
 
             itemView.setOnClickListener(object : View.OnClickListener{
